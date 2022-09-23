@@ -7,9 +7,9 @@
 </template>
 
 <script setup>
-    const tableData = [
-        {date: '2016-01-01', name: 'Tom', address: 'Beijing'},
-        {date: '2016-01-01', name: 'Tom', address: 'Beijing'},
-        {date: '2016-01-01', name: 'Tom', address: 'Beijing'}
-    ]
+const tableData = [
+    { date: '2016-01-01', name: 'Tom', address: 'Beijing' },
+    { date: '2016-01-01', name: 'Tom', address: 'Beijing' },
+    { date: '2016-01-01', name: 'Tom', address: 'Beijing' }
+]
 </script>

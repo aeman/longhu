@@ -14,89 +14,72 @@
 </template>
 
 <script setup>
-import * as echarts from 'echarts';
-import { onMounted, ref } from 'vue';
+import * as echarts from "echarts";
+import { onMounted, ref } from "vue";
+import axios from "axios";
 
 onMounted(() => getList());
 
 function getList() {
-    let chart = echarts.init(document.getElementById("myChart"), "macarons");
-    chart.setOption({
+    axios.get("/dev-api/api/index/hello").then((res) => {
+        let chart = echarts.init(document.getElementById("myChart"), "macarons");
+        let data = res.data.data;
 
-        title: {
+        console.log(data);
 
-            text: '今日话务统计'
+        chart.setOption({
+            title: {
+                text: "今日话务统计",
+            },
 
-        },
+            tooltip: {
+                trigger: "axis",
 
-        tooltip: {
+                axisPointer: {
+                    type: "shadow",
+                },
+            },
 
-            trigger: 'axis',
+            grid: {
+                left: "3%",
 
-            axisPointer: {
+                right: "4%",
 
-                type: 'shadow'
+                bottom: "3%",
 
-            }
+                containLabel: true,
+            },
 
-        },
+            xAxis: [
+                {
+                    type: "category",
 
-        grid: {
+                    data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
 
-            left: '3%',
+                    axisTick: {
+                        alignWithLabel: true,
+                    },
+                },
+            ],
 
-            right: '4%',
+            yAxis: [
+                {
+                    type: "value",
+                },
+            ],
 
-            bottom: '3%',
+            series: [
+                {
+                    name: "直接访问",
 
-            containLabel: true
+                    type: "bar",
 
-        },
+                    barWidth: "60%",
 
-        xAxis: [
-
-            {
-
-                type: 'category',
-
-                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-
-                axisTick: {
-
-                    alignWithLabel: true
-
-                }
-
-            }
-
-        ],
-
-        yAxis: [
-
-            {
-
-                type: 'value'
-
-            }
-
-        ],
-
-        series: [
-
-            {
-
-                name: '直接访问',
-
-                type: 'bar',
-
-                barWidth: '60%',
-
-                data: [10, 52, 200, 334, 390, 330, 220]
-
-            }
-
-        ]
-
+                    data: data,
+                },
+            ],
+        });
     });
 }
 </script>
